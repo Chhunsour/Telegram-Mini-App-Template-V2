@@ -1,0 +1,28 @@
+{
+  "name": "telegram-mini-app-template",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "api": "node --env-file-if-exists=.env server/bot.mjs --api-only",
+    "bot": "node --env-file-if-exists=.env server/bot.mjs",
+    "bot:check": "node server/bot.mjs --self-test",
+    "type-check": "vue-tsc -b",
+    "check:catalog": "node --experimental-strip-types scripts/catalog-check.ts"
+  },
+  "dependencies": {
+    "pinia": "^4.0.2",
+    "vue": "^3.5.40",
+    "vue-router": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.5",
+    "vue-tsc": "^3.3.7"
+  }
+}

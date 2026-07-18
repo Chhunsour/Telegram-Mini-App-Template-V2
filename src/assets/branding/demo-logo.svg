@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#f7f8fa"/>
+  <rect x="110" y="120" width="360" height="360" rx="72" fill="#2563eb"/>
+  <path d="M215 245h150l-18 155H233z" fill="none" stroke="#fff" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M250 250c0-72 80-72 80 0" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round"/>
+  <text x="535" y="360" fill="#202124" font-family="Arial, sans-serif" font-size="150" font-weight="700">Demo Shop</text>
+</svg>
