@@ -38,12 +38,12 @@ async function api(method, data) {
 }
 
 function miniAppUrl() {
-  if (!configuredUrl) return undefined
+  const currentUrl = process.env.MINI_APP_URL || 'https://telegram-mini-app-template-v2.vercel.app'
   try {
-    const url = new URL(configuredUrl)
+    const url = new URL(currentUrl)
     return url.href
   } catch {
-    return undefined
+    return 'https://telegram-mini-app-template-v2.vercel.app'
   }
 }
 
@@ -868,6 +868,43 @@ async function handleCallbackQuery(query) {
         '3️⃣ វាយពាក្យ <code>/connectstore</code> នៅក្នុង Group',
         '4️⃣ រួចរាល់! គ្រប់ការបញ្ជាទិញនឹងផ្ញើចូល Group នោះភ្លាមៗ។',
       ].join('\n'),
+      parse_mode: 'HTML',
+    })
+    return
+  }
+
+  // 5. Customer Menu Callbacks
+  if (data === 'store') {
+    await api('sendMessage', {
+      chat_id: chatId,
+      text: '🛒 <b>បើកហាង / Open Store:</b>\n\nសូមកំណត់ <code>MINI_APP_URL</code> នៅក្នុង <code>.env</code> ជាមួយ URL WebApp របស់ហាងអ្នក (ឧទាហរណ៍: Vercel / Netlify URL)។',
+      parse_mode: 'HTML',
+    })
+    return
+  }
+
+  if (data === 'orders') {
+    await api('sendMessage', {
+      chat_id: chatId,
+      text: '📦 <b>ការបញ្ជាទិញ / Customer Orders:</b>\n\nសូមបើក Mini App ដើម្បីមើលប្រវត្តិការបញ្ជាទិញរបស់អ្នក ឬទាក់ទងបុគ្គលិកហាង។',
+      parse_mode: 'HTML',
+    })
+    return
+  }
+
+  if (data === 'contact') {
+    await api('sendMessage', {
+      chat_id: chatId,
+      text: `☎️ <b>ទំនាក់ទំនងហាង / Store Contact:</b>\n\n📞 លេខទូរស័ព្ទ: <code>${store.phone || '+855 12 345 678'}</code>\n🏪 ហាង: <b>${store.name}</b>`,
+      parse_mode: 'HTML',
+    })
+    return
+  }
+
+  if (data === 'help') {
+    await api('sendMessage', {
+      chat_id: chatId,
+      text: '❓ <b>របៀបទិញទំនិញ / Shopping Help:</b>\n\n1️⃣ ចុច 🛒 បើកហាង / Open Store\n2️⃣ ជ្រើសរើសទំនិញ និងបន្ថែមចូល Cart\n3️⃣ បញ្ចូលព័ត៌មាន និងផ្ញើការបញ្ជាទិញ!',
       parse_mode: 'HTML',
     })
     return
