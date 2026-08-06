@@ -11,9 +11,13 @@
     "bot": "node --env-file-if-exists=.env server/bot.mjs",
     "bot:check": "node server/bot.mjs --self-test",
     "type-check": "vue-tsc -b",
-    "check:catalog": "node --experimental-strip-types scripts/catalog-check.ts"
+    "check:catalog": "node --experimental-strip-types scripts/catalog-check.ts",
+    "store:create": "tsx scripts/create-store.ts",
+    "store:validate": "tsx scripts/validate-store.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.1",
+    "dotenv": "^17.4.2",
     "pinia": "^4.0.2",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"
@@ -21,6 +25,7 @@
   "devDependencies": {
     "@types/node": "^26.1.1",
     "@vitejs/plugin-vue": "^6.0.8",
+    "tsx": "^4.23.8",
     "typescript": "^5.9.3",
     "vite": "^8.1.5",
     "vue-tsc": "^3.3.7"

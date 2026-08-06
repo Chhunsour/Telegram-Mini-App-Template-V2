@@ -1,6 +1,6 @@
 import type { TelegramUser } from './index'
 
-interface TelegramButton {
+export interface TelegramButton {
   show(): TelegramButton
   hide(): TelegramButton
   onClick(callback: () => void): TelegramButton
@@ -14,7 +14,7 @@ interface TelegramButton {
   }): TelegramButton
 }
 
-interface TelegramWebApp {
+export interface TelegramWebApp {
   initData: string
   initDataUnsafe: { user?: TelegramUser }
   version: string
@@ -36,8 +36,6 @@ interface TelegramWebApp {
 
 declare global {
   interface Window {
-    Telegram?: { WebApp: TelegramWebApp }
+    Telegram?: { WebApp?: TelegramWebApp }
   }
 }
-
-export type { TelegramWebApp }
