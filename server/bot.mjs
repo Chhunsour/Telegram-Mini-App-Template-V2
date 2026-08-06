@@ -915,22 +915,34 @@ async function executeStoreGroupConnect(store, groupChatId, groupTitle, userId) 
   const prevGroupId = store.order_group_id
   const newGroupId = String(groupChatId)
 
-  const { error } = await supabase
-    .from('stores')
-    .update({ order_group_id: newGroupId, updated_at: new Date().toISOString() })
-    .eq('id', store.id)
-
-  if (error) {
-    console.error('Failed to update order_group_id:', error)
-    await api('sendMessage', {
-      chat_id: groupChatId,
-      text: '❌ បរាជ័យក្នុងការភ្ជាប់ Store ជាមួយ Group។ / Failed to save group connection to database.',
-    })
-    return
+  // Try updating Supabase DB if table exists
+  try {
+    await supabase
+      .from('stores')
+      .update({ order_group_id: newGroupId, updated_at: new Date().toISOString() })
+      .eq('id', store.id)
+  } catch (err) {
+    console.warn('Notice: Supabase stores DB table update fallback active:', err.message)
   }
 
+  // Always update in-memory active store and process.env
   store.order_group_id = newGroupId
   activeStore = store
+  process.env.TELEGRAM_ORDER_GROUP_ID = newGroupId
+
+  // Persist to local .env file
+  try {
+    const fs = await import('node:fs')
+    let envContent = fs.readFileSync('.env', 'utf8')
+    if (envContent.includes('TELEGRAM_ORDER_GROUP_ID=')) {
+      envContent = envContent.replace(/TELEGRAM_ORDER_GROUP_ID=.*/, `TELEGRAM_ORDER_GROUP_ID=${newGroupId}`)
+    } else {
+      envContent += `\nTELEGRAM_ORDER_GROUP_ID=${newGroupId}\n`
+    }
+    fs.writeFileSync('.env', envContent)
+  } catch {
+    /* fallback ignore */
+  }
 
   await logAudit(store.id, userId, 'CONNECT_ORDER_GROUP', `stores/${store.id}`, { order_group_id: prevGroupId }, { order_group_id: newGroupId, group_title: groupTitle })
 

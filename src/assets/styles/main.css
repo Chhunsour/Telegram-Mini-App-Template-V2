@@ -235,11 +235,12 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
 .footer-brand { display: flex; justify-content: center; }
 .footer p { margin: 8px 0 18px; color: #aaa; font-size: .8rem; }
 .footer small { color: #777; }
-.bottom-nav { position: fixed; z-index: 35; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: repeat(4, 1fr); min-height: calc(60px + max(0px, var(--tg-safe-area-inset-bottom))); padding: 4px max(8px, var(--tg-safe-area-inset-right)) max(4px, var(--tg-safe-area-inset-bottom)) max(8px, var(--tg-safe-area-inset-left)); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 96%, transparent); backdrop-filter: blur(14px); }
-.bottom-nav a { position: relative; display: grid; place-items: center; align-content: center; gap: 2px; color: var(--muted); font-size: .63rem; }
-.bottom-nav a span { font-size: 1.18rem; }
-.bottom-nav-count { position: absolute; top: 3px; left: calc(50% + 7px); min-width: 18px; height: 18px; padding-inline: 5px; border-radius: 99px; background: var(--brand); color: #fff; font-size: .62rem; line-height: 18px; text-align: center; }
-.bottom-nav a.router-link-active { color: var(--brand); }
+.bottom-nav { position: fixed; z-index: 35; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: repeat(4, 1fr); min-height: calc(62px + max(0px, var(--tg-safe-area-inset-bottom))); padding: 6px max(8px, var(--tg-safe-area-inset-right)) max(6px, var(--tg-safe-area-inset-bottom)) max(8px, var(--tg-safe-area-inset-left)); border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 96%, transparent); backdrop-filter: blur(14px); }
+.bottom-nav a { position: relative; display: grid; place-items: center; align-content: center; gap: 4px; color: var(--muted); font-size: .7rem; font-weight: 500; text-decoration: none; transition: color .2s ease; }
+.bottom-nav a span { display: block; line-height: 1; }
+.bottom-nav-count { position: absolute; top: -4px; right: -8px; min-width: 17px; height: 17px; padding-inline: 4px; border-radius: 99px; background: var(--brand); color: #fff; font-size: .6rem; font-weight: 700; line-height: 17px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+.bottom-nav a.router-link-active { color: var(--brand); font-weight: 700; }
+.bottom-nav a.router-link-active .nav-icon { stroke: var(--brand); stroke-width: 2.3; transform: scale(1.08); }
 
 @media (min-width: 700px) {
   .container { width: min(calc(100% - 64px), var(--content)); }
